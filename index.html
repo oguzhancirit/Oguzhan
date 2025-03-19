@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oğuzhan'ın Yapılacaklar Listesi</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Oğuzhan'ın Yapılacaklar Listesi</h1>
+            <div class="point-system">
+                <div class="point-circle">
+                    <span id="total-points">0</span>
+                    <span class="point-label">Puan</span>
+                </div>
+            </div>
+        </div>
+        
+        <div id="filter-section">
+            <h3>Filtreler</h3>
+            <div class="filters">
+                <div class="filter-group">
+                    <label>Önceliğe Göre:</label>
+                    <select id="priority-filter">
+                        <option value="all">Tümü</option>
+                        <option value="high">Yüksek</option>
+                        <option value="medium">Orta</option>
+                        <option value="low">Düşük</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Kategoriye Göre:</label>
+                    <select id="category-filter">
+                        <option value="all">Tümü</option>
+                        <!-- Kategoriler JavaScript ile doldurulacak -->
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Görünüm:</label>
+                    <select id="view-filter">
+                        <option value="all">Tümü</option>
+                        <option value="active">Aktif</option>
+                        <option value="completed">Tamamlanan</option>
+                        <option value="expired">Süresi Geçen</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        
+        <form id="todo-form">
+            <input type="text" id="todo-input" placeholder="Yapılacak iş..." required>
+            <input type="datetime-local" id="todo-date" required>
+            
+            <div class="form-row">
+                <select id="todo-priority">
+                    <option value="medium">Orta Öncelik</option>
+                    <option value="high">Yüksek Öncelik</option>
+                    <option value="low">Düşük Öncelik</option>
+                </select>
+                
+                <select id="todo-category">
+                    <option value="">Kategori Seç</option>
+                    <option value="kişisel">Kişisel</option>
+                    <option value="iş">İş</option>
+                    <option value="eğitim">Eğitim</option>
+                    <option value="alışveriş">Alışveriş</option>
+                    <option value="diğer">Diğer</option>
+                </select>
+            </div>
+            
+            <div class="form-row">
+                <textarea id="todo-notes" placeholder="Not ekle (isteğe bağlı)..."></textarea>
+            </div>
+            
+            <button type="submit">Ekle</button>
+        </form>
+        
+        <div id="views-section">
+            <div class="view-tabs">
+                <button class="view-tab active" data-view="list">Liste</button>
+                <button class="view-tab" data-view="kanban">Kanban</button>
+                <button class="view-tab" data-view="calendar">Takvim</button>
+            </div>
+            
+            <div id="list-view" class="view-content active">
+                <ul id="todo-list">
+                    <!-- Yapılacaklar burada listelenecek -->
+                </ul>
+            </div>
+            
+            <div id="kanban-view" class="view-content">
+                <div class="kanban-container">
+                    <div class="kanban-column" data-status="todo">
+                        <h3>Yapılacak</h3>
+                        <div class="kanban-items" id="kanban-todo"></div>
+                    </div>
+                    <div class="kanban-column" data-status="inprogress">
+                        <h3>Devam Ediyor</h3>
+                        <div class="kanban-items" id="kanban-inprogress"></div>
+                    </div>
+                    <div class="kanban-column" data-status="completed">
+                        <h3>Tamamlandı</h3>
+                        <div class="kanban-items" id="kanban-completed"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="calendar-view" class="view-content">
+                <div class="calendar-header">
+                    <div class="calendar-nav">
+                        <button id="prev-month">&lt;</button>
+                        <h2 id="current-month-year">Ocak 2023</h2>
+                        <button id="next-month">&gt;</button>
+                    </div>
+                    <div class="calendar-view-options">
+                        <button class="calendar-view-option active" data-view="month">Ay</button>
+                        <button class="calendar-view-option" data-view="week">Hafta</button>
+                        <button class="calendar-view-option" data-view="day">Gün</button>
+                    </div>
+                </div>
+                
+                <div class="calendar-container">
+                    <div class="calendar-month-view active">
+                        <div class="calendar-days-header">
+                            <div>Pzt</div>
+                            <div>Sal</div>
+                            <div>Çar</div>
+                            <div>Per</div>
+                            <div>Cum</div>
+                            <div>Cmt</div>
+                            <div>Paz</div>
+                        </div>
+                        <div class="calendar-grid" id="calendar-month-grid">
+                            <!-- Takvim günleri JavaScript ile doldurulacak -->
+                        </div>
+                    </div>
+                    
+                    <div class="calendar-week-view">
+                        <div class="calendar-time-header">
+                            <div class="time-header-space"></div>
+                            <div class="day-headers" id="week-day-headers">
+                                <!-- Hafta günleri JavaScript ile doldurulacak -->
+                            </div>
+                        </div>
+                        <div class="calendar-time-grid">
+                            <div class="time-slots">
+                                <!-- Saat dilimleri JavaScript ile doldurulacak -->
+                            </div>
+                            <div class="week-grid" id="calendar-week-grid">
+                                <!-- Haftalık görünüm JavaScript ile doldurulacak -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="calendar-day-view">
+                        <div class="day-timeline" id="day-timeline">
+                            <!-- Günlük görünüm JavaScript ile doldurulacak -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Görev Detayları Modal -->
+    <div id="task-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="modal-title">Görev Detayları</h2>
+            <div class="modal-body">
+                <div class="modal-info">
+                    <p><strong>Öncelik:</strong> <span id="modal-priority"></span></p>
+                    <p><strong>Kategori:</strong> <span id="modal-category"></span></p>
+                    <p><strong>Tarih:</strong> <span id="modal-date"></span></p>
+                    <p><strong>Kalan Süre:</strong> <span id="modal-remaining"></span></p>
+                </div>
+                <div class="modal-notes">
+                    <h3>Notlar</h3>
+                    <div id="modal-notes"></div>
+                </div>
+                <div class="modal-actions">
+                    <button id="modal-toggle-status">Durumu Değiştir</button>
+                    <button id="modal-edit">Düzenle</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
